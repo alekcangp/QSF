@@ -118,10 +118,10 @@ app.frame("/token", async (c) => {
       >
         <p></p>
         Enter contract arguments, separated by comma:
-        <p>Owner address</p>
-        <p>Token name</p>
-        <p>Token symbol</p>
-        <p>Total supply</p>
+        <p>owner address,</p>
+        <p>token name,</p>
+        <p>token symbol,</p>
+        <p>total supply</p>
         <p></p>
       </div>
     ),
@@ -144,7 +144,6 @@ function main(contract, owner, name, sym, amo) {
     "cd hardhat-morph && npx hardhat run --network morphTestnet scripts/deploy.ts",
     (error, stdout, stderr) => {
       caddr = stdout.substring(0, 42) || error || stderr;
-      console.log("dfd" + caddr);
       //console.log("er:" + error + "out:" + stdout + "st" + stderr);
     },
   );
