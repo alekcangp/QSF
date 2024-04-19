@@ -88,7 +88,7 @@ Set Environment Variables
 ## Check the frame
 
 
-Frame URL [https://morph.loophole.site/](https://morph.loophole.site/)
+Frame URL (faucet & deploy) [https://morph.loophole.site/](https://morph.loophole.site/)
 
 Alternative URL (only faucet) [https://morphl2-frame.vercel.app/api](https://morphl2-frame.vercel.app/api)
 
