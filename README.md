@@ -88,6 +88,7 @@ Set Environment Variables
 ## Check the frame
 
 [Debugger frame.js](https://debugger.framesjs.org/?url=https://morph.loophole.site/)
+[Debugger frog.fm](https://morph.loophole.site/dev)
 
 Frame URL (faucet & deploy) [https://morph.loophole.site/](https://morph.loophole.site/)
 
