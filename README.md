@@ -90,6 +90,8 @@ Set Environment Variables
 
 Frame URL [https://morph.loophole.site/](https://morph.loophole.site/)
 
+Alternative URL (only faucet) [https://morph.loophole.site/](https://morphl2.vercel.app/api)
+
 [Debugger frame.js](https://debugger.framesjs.org/?url=https://morph.loophole.site/)
 
 
