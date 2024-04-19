@@ -63,7 +63,7 @@ Frame 6 - Contributors
     
 <center>
   
-[VIDEO](https://www.youtube.com/watch?v=VAAaoD4jSjQ)
+[VIDEO](https://youtu.be/HLVweKWrHJc)
   
 ![1](https://i.postimg.cc/bJhrqZVw/banner.png)
 
