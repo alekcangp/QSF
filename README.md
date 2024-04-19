@@ -95,6 +95,9 @@ Frame URL (faucet & deploy) [https://morph.loophole.site/](https://morph.loophol
 
 Alternative URL (only faucet) [https://morphl2-frame.vercel.app/api](https://morphl2-frame.vercel.app/api)
 
+[Warpcast demo](https://warpcast.com/alekcangp/0xd11234a5)
+[far.quest demo](https://far.quest/alekcangp/0xd11234a50b43266e947b58eec8e45dab72235358)
+
 
 
 
