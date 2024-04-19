@@ -92,7 +92,7 @@ Frame URL [https://morph.loophole.site/](https://morph.loophole.site/)
 
 [Debugger frame.js](https://debugger.framesjs.org/?url=https://morph.loophole.site/)
 
-[Debagger frog.fm](https://morph.loophole.site/dev)
+
 
 ## References
 - https://app.buidlbox.io/morphl2/sparkloom
