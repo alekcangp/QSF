@@ -1,7 +1,7 @@
 
 ## This is Farcaster Frame for easy way to take first step on Morph L2 testnet.
 
-**Setup. Faucet. Deploy. Using the frame, users can connect their wallet to Morph, request funds (ETH and USDT), simply enter wallet address, and hit “0.01 ETH” or “1 USDT".  One more things it's one-click deploy ERC20 or ERC404 token.**
+**Setup. Faucet. Deploy. Using the frame, users can connect their wallet to Morph, request funds (ETH and USDT), simply enter wallet address, and hit “0.01 ETH” or “1 USDT".  One more things it's one-click deploy ERC20 or ERC404 token with token URI generated based-on token data (it's used [Nouns API](https://nounce.wtf)).**
 
 <p align="center">
  <a href="https://www.youtube.com/watch?v=HLVweKWrHJc">VIDEO</a> 
