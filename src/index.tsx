@@ -225,7 +225,7 @@ app.frame("/deploy", async (c) => {
           fontSize: 35,
         }}
       >
-        Wait about 20 seconds for the contract to be deployed and verified ...
+        Wait about 30 seconds for the contract to be deployed and verified ...
       </div>
     ),
     intents: [<Button action={br}>Refresh</Button>],
