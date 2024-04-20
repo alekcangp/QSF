@@ -47,36 +47,42 @@ Frame 2 - Menu
 Frame 3 - Deploy contract
 
 - Enter contract arguments
+  
+- Go to Preview frame
 
-- Deploy and verify ERC20 and go to frame 4
+Frame 4 - Preview
 
-- Deploy and verify ERC404 and go to frame 4
+- Show contract arguments and ERC404 token image, generated based-on the arguments.
 
-Frame 4 - Deploying complete
+- Deploy and verify ERC20 and go to frame 5
+
+- Deploy and verify ERC404 and go to frame 5
+
+Frame 5 - Deploying complete
 
 - Link to the contract on Morph testnet
 
-Frame 5 - Setup wallet
+Frame 6 - Setup wallet
 
 - Show a network configuration for Morph testnet and Ethereum Sepolia
 
 - Link to Chainlist website to one-click setup
 
-Frame 6 - Faucet
+Frame 7 - Faucet
 
 - Enter wallet address 0x... or Farcaster username
 
-- Send 0.01 ETH to user's wallet on Morph L2 and go to Frame 7
+- Send 0.01 ETH to user's wallet on Morph L2 and go to Frame 8
 
-- Send 1 USDT to user's wallet on Morph L2 and go to Frame 7
+- Send 1 USDT to user's wallet on Morph L2 and go to Frame 8
 
 Go to Contributors
 
-- Frame 7 - Transaction complete
+- Frame 8 - Transaction complete
 
 - Link to the transaction on Morph explorer
 
-Frame 6 - Contributors
+Frame 9 - Contributors
 
 - Show last 5 contributors which sent assets to the faucet address: date, address or username, amount
 
