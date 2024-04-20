@@ -114,21 +114,17 @@ app.frame("/token", async (c) => {
           justifyContent: "center",
           flexDirection: "column",
           color: "lime",
-          fontSize: 43,
-          marginTop:30,
-          marginBottom:30
+          fontSize: 45,
         }}
       >
-        <p> </p>
+        <p></p>
         Enter contract arguments, separated by comma:
         <p>&#128179; owner address,</p>
         <p>&#9997; token name,</p>
         <p>&#9835; token symbol,</p>
         <p>&#128176; total supply</p>
-        <p> </p>
-        
+        <p></p>
       </div>
-      
     ),
     intents: [
       <TextInput placeholder="Owner,Name,Symbol,Amount" />,
@@ -158,21 +154,19 @@ app.frame("/preview", async (c) => {
           justifyContent: "center",
           flexDirection: "column",
           color: "lime",
-          fontSize: 30
+          fontSize: 35,
         }}
       >
-        <p> </p>
         <p>Owner: {input[fid][0]}</p>
         <p>Token name: {input[fid][1]}</p>
         <p>Token symbol: {input[fid][2]}</p>
         <p>Total supply: {input[fid][3]}</p>
-        <p> </p>
+        <p></p>
         <img
           style={{ margin: "auto", width: 280, height: 280 }}
           src={turi + input[fid]}
         />
-        <p> </p>
-        
+        <p></p>
       </div>
     ),
     intents: [
@@ -192,7 +186,7 @@ function main(contract, faddr, uaddr, name, sym, amt, uri, fid) {
   exec(
     "cd hardhat-morph && npx hardhat run --network morphTestnet scripts/deploy.ts",
     (error, stdout, stderr) => {
-      console.log("er:" + error + "out:" + stdout + "st:" + stderr);
+     // console.log("er:" + error + "out:" + stdout + "st:" + stderr);
 
       caddr =
         stdout != ""
@@ -467,7 +461,6 @@ app.frame("/faucet", async (c) => {
           backgroundSize: "100%, 100%",
           color: "white",
           fontSize: 60,
-          marginTop: 30,
           lineHeight: 1.8,
           display: "flex",
           textAlign: "center",
@@ -478,6 +471,7 @@ app.frame("/faucet", async (c) => {
           backgroundColor: "black",
         }}
       >
+        <p></p>
         FAUCET BALANCE
         <div style={{ display: "flex", color: "lime" }}>
           ETH: {Math.round(ethbal * 1e4) / 1e4}
@@ -485,6 +479,7 @@ app.frame("/faucet", async (c) => {
         <div style={{ display: "flex", color: "violet" }}>
           USDT: {Math.round(usdbal * 1e2) / 1e2}
         </div>
+        <p></p>
       </div>
     ),
     intents: [
