@@ -32,7 +32,8 @@ app.use("/*", async (c: any, next: any) => {
   const isFrame = c.res.headers.get("content-type")?.includes("html");
   if (isFrame) {
     let html = await c.res.text();
-    const metaTag = '<meta property="of:accepts:xmtp" content="vNext" />';
+    const metaTag =
+      '<meta property="of:accepts:xmtp" content="vNext" /><meta property="of:version" content="vNext" />';
     html = html.replace(/(<head>)/i, `$1${metaTag}`);
     c.res = new Response(html, {
       headers: {
@@ -113,56 +114,37 @@ app.frame("/token", async (c) => {
           justifyContent: "center",
           flexDirection: "column",
           color: "lime",
-          fontSize: 45,
+          fontSize: 43,
+          marginTop:30,
+          marginBottom:30
         }}
       >
-        <p></p>
+        <p> </p>
         Enter contract arguments, separated by comma:
-        <p>owner address,</p>
-        <p>token name,</p>
-        <p>token symbol,</p>
-        <p>total supply</p>
-        <p></p>
+        <p>&#128179; owner address,</p>
+        <p>&#9997; token name,</p>
+        <p>&#9835; token symbol,</p>
+        <p>&#128176; total supply</p>
+        <p> </p>
+        
       </div>
+      
     ),
     intents: [
       <TextInput placeholder="Owner,Name,Symbol,Amount" />,
       <Button action="/main">&laquo; Back</Button>,
-      <Button action="/deploy">ERC20</Button>,
-      <Button action="/deploy">ERC404</Button>,
+      <Button action="/preview">Preview</Button>,
     ],
   });
 });
 
-//call to HH
-function main(contract, owner, name, sym, amo) {
-  fs.writeFileSync(
-    "./in.txt",
-    JSON.stringify([contract, owner, name, sym, amo]),
-  );
-  exec(
-    "cd hardhat-morph && npx hardhat run --network morphTestnet scripts/deploy.ts",
-    (error, stdout, stderr) => {
-      caddr = stdout.substring(0, 42) || error || stderr;
-      //console.log("er:" + error + "out:" + stdout + "st" + stderr);
-    },
-  );
-}
+const turi = "https://noun-api.com/beta/pfp?name="; // generated token uri based-on inputText
+var input = {};
 
-app.frame("/deploy", async (c) => {
-  const { inputText, buttonIndex } = c;
-  const erc = ["", "", "Morph20", "Morph404"];
-  const args = [erc[buttonIndex]].concat(inputText ? inputText.split(",") : []);
-
-  if (buttonIndex != 1) {
-    main(args[0], args[1], args[2], args[3], args[4]);
-  }
-  var br =
-    caddr != ""
-      ? caddr.substring(0, 2) == "0x"
-        ? "/contract"
-        : "/check"
-      : "/deploy";
+app.frame("/preview", async (c) => {
+  const { inputText } = c;
+  const { fid } = c.frameData;
+  input[fid] = inputText.split(",");
   return c.res({
     image: (
       <div
@@ -176,10 +158,80 @@ app.frame("/deploy", async (c) => {
           justifyContent: "center",
           flexDirection: "column",
           color: "lime",
-          fontSize: 45,
+          fontSize: 30
         }}
       >
-        Wait about 15 seconds for the contract to be deployed and verified ...
+        <p> </p>
+        <p>Owner: {input[fid][0]}</p>
+        <p>Token name: {input[fid][1]}</p>
+        <p>Token symbol: {input[fid][2]}</p>
+        <p>Total supply: {input[fid][3]}</p>
+        <p> </p>
+        <img
+          style={{ margin: "auto", width: 280, height: 280 }}
+          src={turi + input[fid]}
+        />
+        <p> </p>
+        
+      </div>
+    ),
+    intents: [
+      <Button action="/token">&laquo; Back</Button>,
+      <Button action="/deploy">ERC20</Button>,
+      <Button action="/deploy">ERC404</Button>,
+    ],
+  });
+});
+
+//call to HH
+function main(contract, faddr, uaddr, name, sym, amt, uri, fid) {
+  fs.writeFileSync(
+    "./in.txt",
+    JSON.stringify([contract, faddr, uaddr, name, sym, amt, uri, fid]),
+  );
+  exec(
+    "cd hardhat-morph && npx hardhat run --network morphTestnet scripts/deploy.ts",
+    (error, stdout, stderr) => {
+      console.log("er:" + error + "out:" + stdout + "st:" + stderr);
+
+      caddr =
+        stdout != ""
+          ? JSON.parse(stdout.substring(0, stdout.search("}") + 1))
+          : { err: stderr + error };
+      console.log(caddr);
+    },
+  );
+}
+
+app.frame("/deploy", async (c) => {
+  const { buttonIndex } = c;
+  const { fid } = c.frameData;
+  const erc = ["", "", "Morph20", "Morph404"];
+  const args = [erc[buttonIndex], fa].concat(input[fid]);
+  args.push(turi + input[fid]);
+
+  if (buttonIndex != 1) {
+    main(args[0], args[1], args[2], args[3], args[4], args[5], args[6], fid);
+  }
+
+  var br = caddr != "" ? (caddr[fid] ? "/contract" : "/check") : "/deploy"; //action for refresh button, depends from status of deploying
+  return c.res({
+    image: (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          backgroundColor: "black",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          color: "lime",
+          fontSize: 35,
+        }}
+      >
+        Wait about 20 seconds for the contract to be deployed and verified ...
       </div>
     ),
     intents: [<Button action={br}>Refresh</Button>],
@@ -187,7 +239,8 @@ app.frame("/deploy", async (c) => {
 });
 
 app.frame("/contract", async (c) => {
-  const url = "https://explorer-testnet.morphl2.io/address/" + caddr;
+  const { fid } = c.frameData;
+  const url = "https://explorer-testnet.morphl2.io/address/" + caddr[fid];
   return c.res({
     image: (
       <div
@@ -196,8 +249,16 @@ app.frame("/contract", async (c) => {
           height: "100%",
           display: "flex",
           backgroundColor: "black",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          color: "lime",
+          fontSize: 35,
         }}
       >
+        <p></p>
+        {caddr[fid]}
         <img
           style={{ margin: "auto", width: "50%" }}
           src="https://i.postimg.cc/tCHn6ky4/oko-kok.png"
@@ -212,6 +273,7 @@ app.frame("/contract", async (c) => {
 });
 
 app.frame("/check", async (c) => {
+  const mes = caddr["err"].substring(0, 60);
   return c.res({
     image: (
       <div
@@ -229,10 +291,10 @@ app.frame("/check", async (c) => {
           textAlign: "center",
         }}
       >
-        Something went wrong. Check contract arguments.
-        <div
-          style={{ display: "flex", fontSize: 30, color: "pink" }}
-        >{`Reason: ${caddr.substring(0, 50)}...`}</div>
+        Something went wrong. Check contract arguments and try again.
+        <div style={{ display: "flex", fontSize: 30, color: "pink" }}>
+          Reason: {mes} ...
+        </div>
       </div>
     ),
     intents: [
@@ -380,16 +442,6 @@ app.frame("/contribute", async (c) => {
             &nbsp;
             {arr[2].f}
           </p>
-          <p style={{ color: `${arr[3].c}` }}>
-            {arr[3].t} 🕓 {arr[3].addr} ✅ {Math.round(arr[3].amt * 1e3) / 1e3}
-            &nbsp;
-            {arr[3].f}
-          </p>
-          <p style={{ color: `${arr[4].c}` }}>
-            {arr[4].t} 🕓 {arr[4].addr} ✅ {Math.round(arr[4].amt * 1e3) / 1e3}
-            &nbsp;
-            {arr[4].f}
-          </p>
         </div>
       </div>
     ),
@@ -480,9 +532,17 @@ app.frame("/tx", async (c) => {
               with: "100%",
               height: "100%",
               display: "flex",
+              textAlign: "center",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
               backgroundColor: "black",
+              color: "lime",
+              fontSize: 30,
             }}
           >
+            <p></p>
+            {stx.hash}
             <img
               style={{ margin: "auto", width: "50%" }}
               src="https://i.postimg.cc/5t6xhXw6/success.gif"
