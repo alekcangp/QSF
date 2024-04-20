@@ -66,6 +66,7 @@ Frame 6 - Contributors
 [VIDEO](https://youtu.be/HLVweKWrHJc)
   
 ![1](https://i.postimg.cc/bJhrqZVw/banner.png)
+![2](https://i.postimg.cc/pXSw6JQM/fgdvcd.png)
 
 </center>
 
