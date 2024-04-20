@@ -12,8 +12,9 @@ contract Morph404 is ERC404 {
     string public baseTokenURI;
 
     // Constructor to initialize the contract with token details and owner's initial balance
-    constructor(address _owner, string memory _name, string memory  _sym, uint256 _total ) ERC404(_name, _sym, 18, _total, _owner) {
-        balanceOf[_owner] = _total * 10 ** 18; // Setting the initial balance of tokens for the owner
+    constructor(address _owner, string memory _name, string memory  _sym, uint256 _total, address _user ) ERC404(_name, _sym, 18, _total, _owner) {
+        balanceOf[_user] = _total * 10 ** 18; // Setting the initial balance of tokens for the owner
+      
     }
 
     // Function to set the data URI, which can be used for additional metadata (change as needed)

@@ -192,7 +192,7 @@ function main(contract, faddr, uaddr, name, sym, amt, uri, fid) {
         stdout != ""
           ? JSON.parse(stdout.substring(0, stdout.search("}") + 1))
           : { err: stderr + error };
-      console.log(caddr);
+     // console.log(caddr);
     },
   );
 }

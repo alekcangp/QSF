@@ -8,14 +8,18 @@ async function main() {
 
   //console.log(args[1]);
   // return;
-  const owner = args[0] == "Morph404" ? args[1] : args[2]; //owner: faucet or user address
+  const ar =
+    args[0] == "Morph404"
+      ? [
+          args[1], //owner faucet address
+          args[3], //name
+          args[4], //symbol
+          args[5], // supply
+          args[2], //user address
+        ]
+      : [args[2], args[3], args[4], args[5]];
 
-  const contract = await ethers.deployContract(args[0], [
-    owner,
-    args[3], //name
-    args[4], //symbol
-    args[5], // supply
-  ]);
+  const contract = await ethers.deployContract(args[0], ar);
 
   console.log('{"' + args[7] + '":"' + contract.target + '"}');
 
@@ -32,7 +36,7 @@ async function main() {
 
   await hre.run("verify:verify", {
     address: contract.target,
-    constructorArguments: [owner, args[3], args[4], args[5]],
+    constructorArguments: [ar],
   });
 }
 
