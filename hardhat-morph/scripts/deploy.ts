@@ -36,7 +36,7 @@ async function main() {
 
   await hre.run("verify:verify", {
     address: contract.target,
-    constructorArguments: [ar],
+    constructorArguments: ar,
   });
 }
 
