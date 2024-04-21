@@ -4,6 +4,8 @@ import { devtools } from "frog/dev";
 import { ethers } from "ethers";
 import { exec } from "child_process";
 import * as fs from "fs";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const usdtAbi = [
   "function balanceOf(address) view returns (uint)",
