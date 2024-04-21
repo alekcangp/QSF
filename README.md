@@ -122,8 +122,11 @@ Alternative URL (only faucet) [https://morphl2-frame.vercel.app/api](https://mor
 
 
 
+
+
 ## References
 - https://app.buidlbox.io/morphl2/sparkloom
 -   https://docs.farcaster.xyz/reference/frames/spec
 -   https://github.com/open-frames/standard
+-   https://www.quicknode.com/guides/welcome
 
