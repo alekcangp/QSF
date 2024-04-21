@@ -92,7 +92,6 @@ Frame 9 - Contributors
 
 ## Install
 
-**Local**
 ```
 npm install && npm --prefix hardhat-morph install
 npm run dev
