@@ -178,21 +178,51 @@ app.frame("/preview", async (c) => {
 });
 
 //call to HH
-function main(contract, faddr, uaddr, name, sym, amt, uri, fid) {
-  fs.writeFileSync(
-    "./in.txt",
-    JSON.stringify([contract, faddr, uaddr, name, sym, amt, uri, fid]),
-  );
+async function main(args) {
+  //args[contract,fa,user,name,symbol,supply,uri,fid]
+  //pin meta to ipfa
+ if (args[0] == "Morph404") {
+  const options = {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + process.env.PINATA_JWT,
+      "Content-Type": "application/json",
+    },
+    body:
+      '{"pinataOptions":{"cidVersion":1},"pinataMetadata":{"name":"' +
+      args[3] +
+      '"},"pinataContent":{"name":"' +
+      args[3] +
+      '","symbol":"' +
+      args[4] +
+      '","total":"' +
+      args[5] +
+      '","image":"' +
+      args[6] +
+      '"}}',
+  };
+
+  const ipfs = await fetch(
+    "https://api.pinata.cloud/pinning/pinJSONToIPFS",
+    options,
+  )
+    .then((response) => response.json())
+    .then((response) => args[6] = "ipfs://" + response.IpfsHash)
+    .catch((err) => console.error(err));
+
+ }
+
+  fs.writeFileSync("./in.txt", JSON.stringify(args));
   exec(
     "cd hardhat-morph && npx hardhat run --network morphTestnet scripts/deploy.ts",
     (error, stdout, stderr) => {
-     // console.log("er:" + error + "out:" + stdout + "st:" + stderr);
+      // console.log("er:" + error + "out:" + stdout + "st:" + stderr);
 
       caddr =
         stdout != ""
           ? JSON.parse(stdout.substring(0, stdout.search("}") + 1))
           : { err: stderr + error };
-     // console.log(caddr);
+      //console.log(caddr);
     },
   );
 }
@@ -202,10 +232,10 @@ app.frame("/deploy", async (c) => {
   const { fid } = c.frameData;
   const erc = ["", "", "Morph20", "Morph404"];
   const args = [erc[buttonIndex], fa].concat(input[fid]);
-  args.push(turi + input[fid]);
+  args.push(turi + input[fid], fid);
 
   if (buttonIndex != 1) {
-    main(args[0], args[1], args[2], args[3], args[4], args[5], args[6], fid);
+    main(args);
   }
 
   var br = caddr != "" ? (caddr[fid] ? "/contract" : "/check") : "/deploy"; //action for refresh button, depends from status of deploying
@@ -231,6 +261,7 @@ app.frame("/deploy", async (c) => {
     intents: [<Button action={br}>Refresh</Button>],
   });
 });
+
 
 app.frame("/contract", async (c) => {
   const { fid } = c.frameData;
