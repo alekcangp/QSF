@@ -97,8 +97,6 @@ npm install && npm --prefix hardhat-morph install
 npm run dev
 ```
 
-Set Environment Variables: MORPH_TESTNET_URL, PRIVATE_KEY, PINATA_JWT
-
 `Frame URL http://localhost:5137`
 
 `Dev URL http://localhost:5137/dev`
