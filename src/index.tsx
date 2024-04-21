@@ -267,7 +267,7 @@ app.frame("/deploy", async (c) => {
 
 app.frame("/contract", async (c) => {
   const { fid } = c.frameData;
-  const url = "https://explorer-testnet.morphl2.io/address/" + caddr[fid];
+  const url = "https://explorer-testnet.morphl2.io/token/" + caddr[fid];
   return c.res({
     image: (
       <div
@@ -294,7 +294,7 @@ app.frame("/contract", async (c) => {
     ),
     intents: [
       <Button action="/token">&laquo; Back</Button>,
-      <Button.Link href={url}>View Contract</Button.Link>,
+      <Button.Link href={url}>View Token</Button.Link>,
     ],
   });
 });
