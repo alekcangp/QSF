@@ -104,17 +104,19 @@ npm run dev
 
 ## Check the frame
 
-Frame URL (faucet & deploy) [https://morph.loophole.site/](https://morph.loophole.site/)
+<!--Frame URL (faucet & deploy) [https://morph.loophole.site/](https://morph.loophole.site/)-->
 
 Alternative URL (only faucet) [https://morphl2-frame.vercel.app/api](https://morphl2-frame.vercel.app/api)
 
-[Debugger frame.js](https://debugger.framesjs.org/?url=https://morph.loophole.site/)
+<!--[Debugger frame.js](https://debugger.framesjs.org/?url=https://morph.loophole.site/)
 
 [Debugger frog.fm](https://morph.loophole.site/dev)
+
 
 [Warpcast demo](https://warpcast.com/alekcangp/0xd11234a5)
 
 [far.quest demo](https://far.quest/alekcangp/0xd11234a50b43266e947b58eec8e45dab72235358)
+-->
 
 [ERC404 token created via QSF](https://explorer-testnet.morphl2.io/address/0xb3e126BD8DE276213527A55a12Cf935b08141ADd?tab=contact_code)
 
